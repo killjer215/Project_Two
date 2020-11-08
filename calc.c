@@ -314,6 +314,7 @@ int smp3_main(int argc, char **argv)
 	printErrorAndExit("Failed trying to create threads");
     }
 
+	pthread_join(readerThread, &arg);
     /* you need to join one of these threads... but which one? */
     pthread_detach(multiplierThread);
     pthread_detach(adderThread);
