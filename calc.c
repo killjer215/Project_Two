@@ -100,10 +100,10 @@ void *adder(void *arg)
 		{
 			startOffset = i;
 			remainderOffset = i;
-			while(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
+			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
 			if(startOffset == i)
 				continue;
-			while(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
+			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
 				 
@@ -184,10 +184,10 @@ void *multiplier(void *arg)
 		{
 			startOffset = i;
 			remainderOffset = i;
-			while(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
+			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
 			if(startOffset == i)
 				continue;
-			while(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
+			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
 				 
@@ -262,7 +262,7 @@ void *degrouper(void *arg)
 		{
 			first = i;
 			startOffset = i;
-			while(startOffset; startOffset+1 < bufferlen && isNumeric(buffer[startOffset-1]); startOffset++);
+			for(startOffset; startOffset+1 < bufferlen && isNumeric(buffer[startOffset-1]); startOffset++);
 			if(startOffset == i)
 				continue;
 			if(buffer[startOffset+1] == ')')
