@@ -73,11 +73,11 @@ void *adder(void *arg)
     int bufferlen;
     int value1, value2;
     int startOffset, remainderOffset;
-    int i;
-
+    int i, sum, operlength;
+	char *operand;
+	
      /* remove this line */
-	fprintf(stdout, "%s This is the number at 0\n", buffer[0]);
-	return NULL;
+	
     while (1) {
 
 		/* Step 3: add mutual exclusion */
@@ -97,6 +97,40 @@ void *adder(void *arg)
 	    // if we do, is the next character after it a '+'?
 	    // if so, is the next one a "naked" number?
 		if(buffer[i] == '+')
+		{
+			startOffset = i;
+			remainderOffset = i;
+			while(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
+			if(startOffset == i)
+				continue;
+			while(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
+			if(remainderOffset == i)
+				continue;
+				 
+		       strncpy(operand, &buffer[startOffset], i-startOffset);
+		       operand[i-startOffset] = '\0';
+		       string2int(value1, operand);
+
+		       
+		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
+		       operand[remainderOffset - i] = '\0';
+		       string2int(value2, operand);
+
+		      
+		       sum = value1 + value2;
+
+		       
+		       sprint(operand, "%d", sum);
+
+		       operlength = strlen(operand);
+		       
+		       strncpy( &buffer[startOffset], operand, operlength);
+
+		       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
+   
+		       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
+		   }
+		
 			
 
 	    // once we have value1, value2 and start and end offsets of the
@@ -123,7 +157,9 @@ void *multiplier(void *arg)
     int bufferlen;
     int value1, value2;
     int startOffset, remainderOffset;
-    int i;
+    int i, sum, operlength;
+	char *operand;
+	
 
     return NULL; /* remove this line */
 
@@ -144,6 +180,40 @@ void *multiplier(void *arg)
 	/* Step 2: implement multiplier */
 	for (i = 0; i < bufferlen; i++) {
 	    // same as adder, but v1*v2
+		if(buffer[i] == '*')
+		{
+			startOffset = i;
+			remainderOffset = i;
+			while(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
+			if(startOffset == i)
+				continue;
+			while(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
+			if(remainderOffset == i)
+				continue;
+				 
+		       strncpy(operand, &buffer[startOffset], i-startOffset);
+		       operand[i-startOffset] = '\0';
+		       string2int(value1, operand);
+
+		       
+		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
+		       operand[remainderOffset - i] = '\0';
+		       string2int(value2, operand);
+
+		      
+		       sum = value1 * value2;
+
+		       
+		       sprint(operand, "%d", sum);
+
+		       operlength = strlen(operand);
+		       
+		       strncpy( &buffer[startOffset], operand, operlength);
+
+		       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
+   
+		       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
+		   }
 	}
 
 	// something missing?
@@ -166,6 +236,8 @@ void *degrouper(void *arg)
 {
     int bufferlen;
     int i;
+	int startOffset;
+	int first;
 
     return NULL; /* remove this line */
 
@@ -186,6 +258,28 @@ void *degrouper(void *arg)
 	    // check for '(' followed by a naked number followed by ')'
 	    // remove ')' by shifting the tail end of the expression
 	    // remove '(' by shifting the beginning of the expression
+		if(buffer[i] == '(')
+		{
+			first = i;
+			startOffset = i;
+			while(startOffset; startOffset+1 < bufferlen && isNumeric(buffer[startOffset-1]); startOffset++);
+			if(startOffset == i)
+				continue;
+			if(buffer[startOffset+1] == ')')
+			{
+				for(int j=startOffset+1; j<bufferlen-1; j++)
+				{
+				    arr[j] = arr[j + 1];
+				}
+				bufferlen--;
+				for(int j=first; j<bufferlen-1; j++)
+				{
+				    arr[j] = arr[j + 1];
+				}
+				bufferlen--;
+			}
+		}
+		
 	}
 
 	// something missing?
