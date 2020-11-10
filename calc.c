@@ -99,7 +99,7 @@ void *adder(void *arg)
 	    // if so, is the next one a "naked" number?
 		if(buffer[i] == '+')
 		{
-			fprintf(stdout, "%Wow!\n");
+			
 			startOffset = i;
 			remainderOffset = i;
 			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
@@ -108,7 +108,7 @@ void *adder(void *arg)
 			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
-				 
+			fprintf(stdout, "%Wow!\n");	 
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
