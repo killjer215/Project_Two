@@ -110,10 +110,11 @@ if(buffer[i] == '+')
        // Let us now convert the operands to numbers
       
        // Left operand
+	fprintf(stdout, "This is before strncpy!");
        strncpy(operand, &buffer[startOffset], i-startOffset);
        operand[i-startOffset] = '\0';
        value1 = string2int(operand);
-      
+      fprintf(stdout, "This is after strncpy");
        // Right operand
        strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
        operand[remainderOffset - i] = '\0';
