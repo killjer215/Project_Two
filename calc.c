@@ -88,7 +88,7 @@ return NULL;
 /* storing this prevents having to recalculate it in the loop */
 bufferlen = strlen(buffer);
 operand = (char *)malloc(bufferlen * sizeof(char));
-
+fprintf(stdout, "Size of string%d!",bufferlen);
 for (i = 0; i < bufferlen; i++)
 {
 	fprintf(stdout, "%d!",i);
