@@ -89,7 +89,8 @@ void *adder(void *arg)
 	}
 	/* storing this prevents having to recalculate it in the loop */
 	bufferlen = strlen(buffer);
-												
+	operand = (char *)malloc(bufferlen * sizeof(char));	
+	    Rewrite = (char *)malloc(bufferlen * sizeof(char));
 	/* Step 2: implement adder */
 	for (i = 0; i < bufferlen; i++) {
 	    // do we have value1 already?  If not, is this a "naked" number?
