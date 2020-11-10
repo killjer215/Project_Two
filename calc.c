@@ -91,7 +91,7 @@ void *adder(void *arg)
 
 	/* storing this prevents having to recalculate it in the loop */
 	bufferlen = strlen(buffer);
-
+												fprintf(stdout, "Hello!\n");
 	/* Step 2: implement adder */
 	for (i = 0; i < bufferlen; i++) {
 	    // do we have value1 already?  If not, is this a "naked" number?
@@ -99,6 +99,7 @@ void *adder(void *arg)
 	    // if so, is the next one a "naked" number?
 		if(buffer[i] == '+')
 		{
+			fprintf(stdout, "%Wow!\n");
 			startOffset = i;
 			remainderOffset = i;
 			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
