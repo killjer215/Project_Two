@@ -107,7 +107,7 @@ void *adder(void *arg)
 			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
-			fprintf(stdout, "%c! %d   %d\n", buffer[startOffset], startOffset, i);
+			fprintf(stdout, "%c! %d   %d    %c\n", buffer[startOffset], startOffset, i, buffer[i]);
 
 			Rewrite = buffer[startOffset];
 			strncat(Rewrite, &buffer[startOffset+1], 1);
