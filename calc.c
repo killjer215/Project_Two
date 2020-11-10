@@ -107,8 +107,9 @@ void *adder(void *arg)
 			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
-				 
+			fprintf(stdout, "Right before the strncpy!");	 
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
+			fprintf(stdout, "Right after the strncpy!");
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
 
