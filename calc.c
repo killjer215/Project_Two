@@ -155,7 +155,7 @@ void *multiplier(void *arg)
 	char *temp;
 	
 
-    return NULL; /* remove this line */
+   
 
     while (1) {
 		/* Step 3: add mutual exclusion */
@@ -233,7 +233,7 @@ void *degrouper(void *arg)
 	int startOffset;
 	int first;
 
-    return NULL; /* remove this line */
+   
 
     while (1) {
 
