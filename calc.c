@@ -109,12 +109,12 @@ void *adder(void *arg)
 				 
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 		       operand[i-startOffset] = '\0';
-		       string2int(value1, operand);
+		       value1 = string2int(operand);
 
 		       
 		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
 		       operand[remainderOffset - i] = '\0';
-		       string2int(value2, operand);
+		       value2 = string2int(operand);
 
 		      
 		       sum = value1 + value2;
