@@ -91,6 +91,7 @@ operand = (char *)malloc(bufferlen * sizeof(char));
 
 for (i = 0; i < bufferlen; i++)
 {
+	fprintf(stdout, "%d!",i);
 // Look for a '+' in the expression.
 if(buffer[i] == '+')
    {  
