@@ -112,7 +112,7 @@ void *adder(void *arg)
 			
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 
-		       //operand[i-startOffset] = '\0';
+		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
 		       fprintf(stdout, "%d This is value1: ", value1);
 		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
