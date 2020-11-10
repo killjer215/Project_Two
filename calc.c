@@ -94,12 +94,13 @@ for (i = 0; i < bufferlen; i++)
 // Look for a '+' in the expression.
 if(buffer[i] == '+')
    {  
+	fprintf(stdout, "This is before starOffset!");
 // Look for the beginning of the left operand
        for(startOffset = i; startOffset -1 >=0 && isNumeric(buffer[startOffset-1]); --startOffset);
        // If the left operand is not a naked number, proceed with finding the next '+'
        if( startOffset == i)
            continue;
-      
+      fprintf(stdout, "This is before remainderOffset!");
        // Look for the beginning of the right operand
        for(remainderOffset = i; remainderOffset +1 < bufferlen && isNumeric(buffer[remainderOffset+1]); ++remainderOffset);
        // If the right operand is not a naked number, proceed with finding the next '+'
