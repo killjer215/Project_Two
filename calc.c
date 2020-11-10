@@ -70,77 +70,73 @@ int timeToFinish()
    to worry about associativity! */
 void *adder(void *arg)
 {
-    int bufferlen;
-    int value1, value2;
-    int startOffset, remainderOffset;
-    int i, sum, operlength;
-	char *Rewrite;
-	char *operand;
-	char *temp[20];
+int bufferlen;
+int value1, value2;
+int startOffset, remainderOffset, operator;
+int i, sum;
+char *result;
 
-     /* remove this line */
-	
-    while (1) {
-		/* Step 3: add mutual exclusion */
-	startOffset = remainderOffset = -1;
-	value1 = value2 = -1;
-	if (timeToFinish()) {
-	    return NULL;
-	}
-	/* storing this prevents having to recalculate it in the loop */
-	bufferlen = strlen(buffer);
-	operand = (char *)malloc(bufferlen * sizeof(char));	
-	    Rewrite = (char *)malloc(bufferlen * sizeof(char));
-	/* Step 2: implement adder */
-	for (i = 0; i < bufferlen; i++) {
-	    // do we have value1 already?  If not, is this a "naked" number?
-	    // if we do, is the next character after it a '+'?
-	    // if so, is the next one a "naked" number?
-		if(buffer[i] == '+')
-		{
-			
-			startOffset = i;
-			remainderOffset = i;
-			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
-			if(startOffset == i)
-				continue;
-			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
-			if(remainderOffset == i)
-				continue;
-			fprintf(stdout, "%c! %d   %d    %c\n", buffer[startOffset], startOffset, i, buffer[i]);
+// return NULL; /* remove this line */
 
-			
-		       strncpy(operand, &buffer[startOffset], i-startOffset);
+while (1) {
+startOffset = remainderOffset = -1;
+value1 = value2 = -1;
 
-		       operand[i-startOffset] = '\0';
-		       value1 = string2int(operand);
-		       fprintf(stdout, "%d This is value1: ", value1);
-		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
-		       operand[remainderOffset - i] = '\0';
-		       value2 = string2int(operand);
-		      fprintf(stdout, "%d This is value2: ", value2);
-		       sum = value1 + value2;
-		       fprintf(stdout, "%d This is the sum: ", sum);
-		       operand = int2string(sum, temp);
-		       operlength = strlen(operand);
-		       
-		       strncpy( &buffer[startOffset], operand, operlength);
-		       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
-   
-		       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
-			
-		   }
-		
-			
-	    // once we have value1, value2 and start and end offsets of the
-	    // expression in buffer, replace it with v1+v2
-	}
-	// something missing?
-	/* Step 3: free the lock */
-	/* Step 6: check progress */
-	/* Step 5: let others play */
-    }
+if (timeToFinish()) {
+return NULL;
 }
+
+/* storing this prevents having to recalculate it in the loop */
+
+pthread_mutex_lock(&lock);
+
+bufferlen = strlen(buffer);
+result = (char*)malloc((bufferlen+1) * sizeof(char));
+
+for (i = 0; i < bufferlen; i++) {
+
+// if the first number hasn't been found yet
+if (startOffset == -1) {
+// if the character is numeric
+if (isNumeric(buffer[i])) {
+// checks to see if the number is followed by +
+if (buffer[i+1] == '+') {
+operator = i+1; // storing the position of the operator '+'
+value1 = string2int(&buffer[i]); // change the character into an int so it can be stored in value1
+startOffset = i; // update the value for the position of value1
+}
+}
+}
+
+// finding the second number (value 2)
+if (isNumeric(buffer[i])) {
+// checks to make sure that the second number is after the operator
+if (i == (operator+1)) {
+value2 = string2int(&buffer[i]);
+remainderOffset = i;
+}
+}
+
+if (startOffset != -1 && remainderOffset != -1) {
+// adding the two values together
+sum = value1+value2;
+int2string(sum, result); // converting the sum into a string
+
+int resultLength = strlen(result);
+int difference = bufferlen-resultLength;
+
+// adding the sum into the buffer
+strncpy(&buffer[startOffset], result, resultLength);
+// shifting the buffer to the left
+memmove(&buffer[resultLength], &buffer[remainderOffset+1], difference * sizeof(int));
+}
+}
+// something missing?
+int unlockRet = pthread_mutex_unlock(&lock);
+// printf("Add unlock: %d\n", unlockRet);
+}
+}
+
 /* Looks for a multiplication symbol "*" surrounded by two numbers, e.g.
    "5*6" and, if found, multiplies the two numbers and replaces the
    mulitplication subexpression with the result ("1+(5*6)+8" becomes
