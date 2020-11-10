@@ -70,79 +70,83 @@ int timeToFinish()
    to worry about associativity! */
 void *adder(void *arg)
 {
-int bufferlen;
-int value1, value2;
-int startOffset, remainderOffset;
-int i, sum, operlength ;
-char *operand, *temp;
+    int bufferlen;
+    int value1, value2;
+    int startOffset, remainderOffset;
+    int i, sum, operlength;
+	char *operand;
+	
+     /* remove this line */
+	
+    while (1) {
 
-while(1) {
-startOffset = remainderOffset = -1;
-value1 = value2 = -1;
-sum = 0;
+		/* Step 3: add mutual exclusion */
+	startOffset = remainderOffset = -1;
+	value1 = value2 = -1;
 
-if (timeToFinish()) {
-return NULL;
-}
+	if (timeToFinish()) {
+	    return NULL;
+	}
 
-/* storing this prevents having to recalculate it in the loop */
-bufferlen = strlen(buffer);
-operand = (char *)malloc(bufferlen * sizeof(char));
-fprintf(stdout, "Size of string%d!",bufferlen);
-for (i = 0; i < bufferlen; i++)
-{
-	fprintf(stdout, "%d!",i);
-// Look for a '+' in the expression.
-if(buffer[i] == '+')
-   {  
-	fprintf(stdout, "This is before starOffset!");
-// Look for the beginning of the left operand
-       for(startOffset = i; startOffset -1 >=0 && isNumeric(buffer[startOffset-1]); --startOffset);
-       // If the left operand is not a naked number, proceed with finding the next '+'
-       if( startOffset == i)
-           continue;
-      fprintf(stdout, "This is before remainderOffset!");
-       // Look for the beginning of the right operand
-       for(remainderOffset = i; remainderOffset +1 < bufferlen && isNumeric(buffer[remainderOffset+1]); ++remainderOffset);
-       // If the right operand is not a naked number, proceed with finding the next '+'
-       if( remainderOffset == i)
-           continue;
-      
-       // Now we have a naked number on both the left and right sides
-       // Let us now convert the operands to numbers
-      
-       // Left operand
-	fprintf(stdout, "This is before strncpy!");
-       strncpy(operand, &buffer[startOffset], i-startOffset);
-       operand[i-startOffset] = '\0';
-       value1 = string2int(operand);
-      fprintf(stdout, "This is after strncpy");
-       // Right operand
-       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
-       operand[remainderOffset - i] = '\0';
-       value2 = string2int(operand);
-      
-       // add the two operands
-       sum = value1 + value2;
-      
-       // convert the numeric sum to a string
-      operand = int2string(sum, temp);
-      
-       operlength = strlen(operand);
-       // write the string sum back into the buffer
-       strncpy( &buffer[startOffset], operand, operlength);
-      
-       // Shift the remaining characters to the left
-       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
-      
-// Accordingly reset the buffer length      
-       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
-   }
-}
-free(operand);
-}
-}
+	/* storing this prevents having to recalculate it in the loop */
+	bufferlen = strlen(buffer);
 
+	/* Step 2: implement adder */
+	for (i = 0; i < bufferlen; i++) {
+	    // do we have value1 already?  If not, is this a "naked" number?
+	    // if we do, is the next character after it a '+'?
+	    // if so, is the next one a "naked" number?
+		if(buffer[i] == '+')
+		{
+			startOffset = i;
+			remainderOffset = i;
+			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
+			if(startOffset == i)
+				continue;
+			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
+			if(remainderOffset == i)
+				continue;
+				 
+		       strncpy(operand, &buffer[startOffset], i-startOffset);
+		       operand[i-startOffset] = '\0';
+		       string2int(value1, operand);
+
+		       
+		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
+		       operand[remainderOffset - i] = '\0';
+		       string2int(value2, operand);
+
+		      
+		       sum = value1 + value2;
+
+		       
+		       sprint(operand, "%d", sum);
+
+		       operlength = strlen(operand);
+		       
+		       strncpy( &buffer[startOffset], operand, operlength);
+
+		       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
+   
+		       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
+		   }
+		
+			
+
+	    // once we have value1, value2 and start and end offsets of the
+	    // expression in buffer, replace it with v1+v2
+	}
+
+	// something missing?
+	/* Step 3: free the lock */
+
+
+	/* Step 6: check progress */
+
+
+	/* Step 5: let others play */
+    }
+}
 /* Looks for a multiplication symbol "*" surrounded by two numbers, e.g.
    "5*6" and, if found, multiplies the two numbers and replaces the
    mulitplication subexpression with the result ("1+(5*6)+8" becomes
