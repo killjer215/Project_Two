@@ -75,6 +75,7 @@ void *adder(void *arg)
     int startOffset, remainderOffset;
     int i, sum, operlength;
 	char *operand;
+	char temp[20];
 	
      /* remove this line */
 	
@@ -120,7 +121,7 @@ void *adder(void *arg)
 		       sum = value1 + value2;
 
 		       
-		       sprint(operand, "%d", sum);
+		       operand = int2string(sum, temp);
 
 		       operlength = strlen(operand);
 		       
