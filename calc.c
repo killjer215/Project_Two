@@ -111,7 +111,7 @@ void *adder(void *arg)
 
 			Rewrite = buffer[startOffset];
 			strncat(Rewrite, &buffer[startOffset+1], 1);
-			fprintf(stdout, "%c!\n", Rewrite[0]);
+			fprintf(stdout, "%c!\n", Rewrite);
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 
 		       operand[i-startOffset] = '\0';
