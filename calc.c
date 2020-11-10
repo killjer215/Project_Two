@@ -74,24 +74,22 @@ void *adder(void *arg)
     int value1, value2;
     int startOffset, remainderOffset;
     int i, sum, operlength;
+	char *Rewrite;
 	char *operand;
-	char temp[20];
-	
+	char *temp[20];
+
      /* remove this line */
 	
     while (1) {
-
 		/* Step 3: add mutual exclusion */
 	startOffset = remainderOffset = -1;
 	value1 = value2 = -1;
-
 	if (timeToFinish()) {
 	    return NULL;
 	}
-
 	/* storing this prevents having to recalculate it in the loop */
 	bufferlen = strlen(buffer);
-
+												
 	/* Step 2: implement adder */
 	for (i = 0; i < bufferlen; i++) {
 	    // do we have value1 already?  If not, is this a "naked" number?
@@ -99,54 +97,47 @@ void *adder(void *arg)
 	    // if so, is the next one a "naked" number?
 		if(buffer[i] == '+')
 		{
+			
 			startOffset = i;
 			remainderOffset = i;
-			fprintf(stdout, "Right before the the for loop!");	
 			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
 			if(startOffset == i)
 				continue;
 			for(remainderOffset; remainderOffset+1 < bufferlen && isNumeric(buffer[remainderOffset+1]); remainderOffset++);
 			if(remainderOffset == i)
 				continue;
-			fprintf(stdout, "Right before the strncpy!");	 
+			fprintf(stdout, "%c! %d   %d\n", buffer[startOffset], startOffset, i);
+
+			Rewrite = buffer[startOffset];
+			fprintf(stdout, "%s!\n", Rewrite);
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
-			fprintf(stdout, "Right after the strncpy!");
+
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
-
 		       
 		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
 		       operand[remainderOffset - i] = '\0';
 		       value2 = string2int(operand);
-
 		      
 		       sum = value1 + value2;
-
 		       
 		       operand = int2string(sum, temp);
-
 		       operlength = strlen(operand);
 		       
 		       strncpy( &buffer[startOffset], operand, operlength);
-
 		       strcpy( &buffer[operlength], &buffer[remainderOffset+1]);
    
 		       bufferlen = bufferlen - (remainderOffset - startOffset + 1) + operlength;
+			
 		   }
 		
 			
-
 	    // once we have value1, value2 and start and end offsets of the
 	    // expression in buffer, replace it with v1+v2
 	}
-
 	// something missing?
 	/* Step 3: free the lock */
-
-
 	/* Step 6: check progress */
-
-
 	/* Step 5: let others play */
     }
 }
