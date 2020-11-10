@@ -75,12 +75,12 @@ int value1, value2;
 int startOffset, remainderOffset;
 int i, sum, operlength ;
 char *operand, *temp;
-
+fprintf(stdout, "Right at the Start!");
 while(1) {
 startOffset = remainderOffset = -1;
 value1 = value2 = -1;
 sum = 0;
-
+fprintf(stdout, "Inside the while 1!");
 if (timeToFinish()) {
 return NULL;
 }
