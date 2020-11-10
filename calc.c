@@ -110,10 +110,11 @@ void *adder(void *arg)
 				continue;
 				 
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
+			fprintf(stdout, "%s!\n", operand);
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
 
-		       fprintf(stdout, "%Wow!\n");
+		       
 		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
 		       operand[remainderOffset - i] = '\0';
 		       value2 = string2int(operand);
