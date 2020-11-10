@@ -269,12 +269,12 @@ void *degrouper(void *arg)
 			{
 				for(int j=startOffset+1; j<bufferlen-1; j++)
 				{
-				    arr[j] = arr[j + 1];
+				    buffer[j] = buffer[j + 1];
 				}
 				bufferlen--;
 				for(int j=first; j<bufferlen-1; j++)
 				{
-				    arr[j] = arr[j + 1];
+				    buffer[j] = buffer[j + 1];
 				}
 				bufferlen--;
 			}
