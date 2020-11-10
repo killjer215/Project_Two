@@ -120,7 +120,7 @@ void *adder(void *arg)
 		      
 		       sum = value1 + value2;
 
-		       fprintf(stderr, "d\n", sum);
+		       
 		       operand = int2string(sum, temp);
 
 		       operlength = strlen(operand);
