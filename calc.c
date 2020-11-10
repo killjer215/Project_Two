@@ -123,6 +123,7 @@ memmove(&buffer[resultLength], &buffer[remainderOffset+1], difference * sizeof(i
 int unlockRet = pthread_mutex_unlock(&lock);
 // printf("Add unlock: %d\n", unlockRet);
 }
+  num_ops++;
 }
 
 /* Looks for a multiplication symbol "*" surrounded by two numbers, e.g.
@@ -198,6 +199,7 @@ memmove(&buffer[resultLength], &buffer[remainderOffset+1], difference * sizeof(i
 int unlockRet = pthread_mutex_unlock(&lock);
 // printf("multiply unlock: %d\n", unlockRet);
 }
+  num_ops++;
 }
 
 
@@ -249,6 +251,7 @@ int unlockRet = pthread_mutex_unlock(&lock);
 // printf("degrouper unlock: %d\n", unlockRet);
 
 }
+  num_ops++;
 }
 
 
