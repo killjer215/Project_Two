@@ -75,8 +75,9 @@ void *adder(void *arg)
     int startOffset, remainderOffset;
     int i;
 
-    return NULL; /* remove this line */
-
+     /* remove this line */
+	fprintf(stdout, "%s This is the number at 0\n", buffer[0]);
+	return 0;
     while (1) {
 
 		/* Step 3: add mutual exclusion */
@@ -95,6 +96,8 @@ void *adder(void *arg)
 	    // do we have value1 already?  If not, is this a "naked" number?
 	    // if we do, is the next character after it a '+'?
 	    // if so, is the next one a "naked" number?
+		if(buffer[i] == '+')
+			
 
 	    // once we have value1, value2 and start and end offsets of the
 	    // expression in buffer, replace it with v1+v2
