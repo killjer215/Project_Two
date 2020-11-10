@@ -74,7 +74,7 @@ int bufferlen;
 int value1, value2;
 int startOffset, remainderOffset;
 int i, sum, operlength ;
-char *operand;
+char *operand, *temp;
 
 while(1) {
 startOffset = remainderOffset = -1;
