@@ -122,7 +122,7 @@ void *adder(void *arg)
 		       value2 = string2int(operand);
 		      
 		       sum = value1 + value2;
-		       fprintf(stdout, "%d This is the sum: ", sum)
+		       fprintf(stdout, "%d This is the sum: ", sum);
 		       operand = int2string(sum, temp);
 		       operlength = strlen(operand);
 		       
