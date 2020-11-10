@@ -74,6 +74,7 @@ void *adder(void *arg)
     int value1, value2;
     int startOffset, remainderOffset;
     int i, sum, operlength;
+	char *Rewrite;
 	char *operand;
 	char *temp[20];
 	
@@ -109,7 +110,8 @@ void *adder(void *arg)
 			if(remainderOffset == i)
 				continue;
 			fprintf(stdout, "%c! %d   %d\n", buffer[startOffset], startOffset, i);
-			
+			Rewrite = buffer[startOffset];
+			fprintf(stdout, "%s!\n", Rewrite);
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 			
 		       operand[i-startOffset] = '\0';
