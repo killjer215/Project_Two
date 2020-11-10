@@ -101,6 +101,7 @@ void *adder(void *arg)
 		{
 			startOffset = i;
 			remainderOffset = i;
+			fprintf(stdout, "Right before the the for loop!");	
 			for(startOffset; startOffset-1 >= 0 && isNumeric(buffer[startOffset-1]); startOffset--);
 			if(startOffset == i)
 				continue;
