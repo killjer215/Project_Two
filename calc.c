@@ -92,6 +92,7 @@ void *adder(void *arg)
 
 	/* storing this prevents having to recalculate it in the loop */
 	bufferlen = strlen(buffer);
+	    operand = (char *)malloc(bufflen * sizeof(char));
 												
 	/* Step 2: implement adder */
 	for (i = 0; i < bufferlen; i++) {
@@ -110,14 +111,7 @@ void *adder(void *arg)
 			if(remainderOffset == i)
 				continue;
 			
-			for(int k  = i; k>=0; k--)
-			{
-				
-				operand[L] = buffer[k];
-			}
-			L = 0;
-		       fprintf(stdout,"%s!",operand);
-			
+			 strncpy(operand, &buffer[startOffset], i-startOffset);
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
 
