@@ -87,7 +87,7 @@ return NULL;
 
 /* storing this prevents having to recalculate it in the loop */
 bufferlen = strlen(buffer);
-operand = (char *)malloc(bufflen * sizeof(char));
+operand = (char *)malloc(bufferlen * sizeof(char));
 
 for (i = 0; i < bufferlen; i++)
 {
@@ -112,18 +112,18 @@ if(buffer[i] == '+')
        // Left operand
        strncpy(operand, &buffer[startOffset], i-startOffset);
        operand[i-startOffset] = '\0';
-       string2int(value1, operand);
+       value1 = string2int(operand);
       
        // Right operand
        strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
        operand[remainderOffset - i] = '\0';
-       string2int(value2, operand);
+       value2 = string2int(operand);
       
        // add the two operands
        sum = value1 + value2;
       
        // convert the numeric sum to a string
-       sprint(operand, "%d", sum);
+      operand = int2string(sum, temp);
       
        operlength = strlen(operand);
        // write the string sum back into the buffer
