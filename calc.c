@@ -12,7 +12,7 @@ pthread_t sentinelThread;
 
 char buffer[BUF_SIZE];
 int num_ops;
-
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 /* Step 3: add mutual exclusion */
 
 
