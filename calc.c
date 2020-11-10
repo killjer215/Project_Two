@@ -109,18 +109,16 @@ void *adder(void *arg)
 				continue;
 			fprintf(stdout, "%c! %d   %d    %c\n", buffer[startOffset], startOffset, i, buffer[i]);
 
-			Rewrite = buffer[startOffset];
 			
-			fprintf(stdout, "%c!\n", Rewrite);
 		       strncpy(operand, &buffer[startOffset], i-startOffset);
 
 		       operand[i-startOffset] = '\0';
 		       value1 = string2int(operand);
-		       
+		       fprintf(stdout, "%d This is value1: ", value1);
 		       strncpy(operand, &buffer[remainderOffset], remainderOffset - i);
 		       operand[remainderOffset - i] = '\0';
 		       value2 = string2int(operand);
-		      
+		      fprintf(stdout, "%d This is value2: ", value2);
 		       sum = value1 + value2;
 		       fprintf(stdout, "%d This is the sum: ", sum);
 		       operand = int2string(sum, temp);
