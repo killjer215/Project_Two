@@ -77,7 +77,7 @@ void *adder(void *arg)
 
      /* remove this line */
 	fprintf(stdout, "%s This is the number at 0\n", buffer[0]);
-	return 0;
+	return NULL;
     while (1) {
 
 		/* Step 3: add mutual exclusion */
