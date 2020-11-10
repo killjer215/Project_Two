@@ -74,6 +74,7 @@ void *adder(void *arg)
     int value1, value2;
     int startOffset, remainderOffset;
     int i, sum, operlength;
+	int L = 0;
 	char *operand;
 	char *temp[20];
 	
@@ -111,8 +112,10 @@ void *adder(void *arg)
 			
 			for(int k  = i; k>=0; k--)
 			{
-				strncat(operand, buffer[k], 1);
+				
+				operand[L] = buffer[k];
 			}
+			L = 0;
 		       fprintf(stdout,"%s!",operand);
 			
 		       operand[i-startOffset] = '\0';
