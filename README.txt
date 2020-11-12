@@ -120,11 +120,14 @@ Q1: At this point, your solution does not contain any synchronization or
 mutual exclusion.  Give an example of and explain a possible
 synchronization error that could occur in this code. Be specific.
 
+One thing that can happen is when you try to add and muiltply at the same time which gives the computer a synchronization error.
+
 Q2: Suppose we implement correct synchronization and mutual exclusion
 for all of the threads.  If our three functions were to operate on all
 expression in the buffer at once (not just the first expression), would
 the program generate incorrect output?  Why or why not?
 
+It would still generate incorrect output because the programs would not be able to tactle everything at one time.
 
 Step 3: Critical Sections
 -------------------------
@@ -148,14 +151,19 @@ synchronization errors (e.g., race conditions, data corruption).
 Q3: For this step, what specific data structure(s) need(s) protection?
 Why?
 
+The buffer needs protection so nothing goes out of bounds.
+
 Q4: What would happen if you had a busy-wait within one of your critical
 sections?  What if it is a loop with sched_yield()?
+
+We would have top wait for a long time
 
 Q5: Why is it sometimes necessary to use the non-blocking
 pthread_mutex_trylock() instead of the blocking pthread_mutex_lock()?
 Think for example of a program that needs to acquire multiple mutexes at
 the same time.
 
+it would decrese our runtime
 
 Step 4: Accounting
 ------------------
@@ -170,6 +178,7 @@ this variable is free from race conditions.
 Q6: Is a new mutex, separate from what you have in Step 3, required to
 correctly implement this behavior?  Why or why not?
 
+yes because it works well
 
 Step 5: Performance
 -------------------
@@ -182,11 +191,16 @@ sched_yield() calls at the appropriate place inside these loops.
 Q7: Why is it important, even on single-processor machines, to keep the
 critical sections as small as possible?
 
+so we have a low margin of error
+
 Q8: Why is spin-waiting without yielding usually inefficient?
+
+because it just does yield.
 
 Q9: When might spin-waiting without yielding or blocking actually be
 *more* efficient?
 
+when it increases in size
 
 Step 6: Monitoring Progress
 ---------------------------
